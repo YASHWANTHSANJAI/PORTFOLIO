@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f1419">
+  <meta name="description" content="Yashwanth Sanjai S — Electronics and Communication Engineering student exploring embedded systems, electronics, and design.">
+  <title>Yashwanth Sanjai S | Glass Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1419;
+      --bg-deep: #090d12;
+      --glass: rgba(255,255,255,.105);
+      --glass-strong: rgba(255,255,255,.16);
+      --line: rgba(255,255,255,.23);
+      --text: #f8fbff;
+      --muted: rgba(233,241,248,.67);
+      --cyan: #00d4ff;
+      --purple: #a855f7;
+      --mono: "Fira Code", ui-monospace, SFMono-Regular, Consolas, monospace;
+      --sans: "Inter", "Segoe UI", Roboto, sans-serif;
+      --display: "Outfit", "Inter", sans-serif;
+      --max: 1160px;
+      --pointer-x: 50vw;
+      --pointer-y: 24vh;
+      --scroll-progress: 0%;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      min-width: 320px; margin: 0; overflow-x: hidden; color: var(--text); font-family: var(--sans); line-height: 1.65;
+      background: radial-gradient(ellipse at 12% 15%, rgba(0,212,255,.12), transparent 32rem), radial-gradient(ellipse at 86% 40%, rgba(168,85,247,.13), transparent 34rem), linear-gradient(150deg, var(--bg), var(--bg-deep) 72%);
+    }
+    body::before, body::after { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    body::before { background: radial-gradient(460px circle at var(--pointer-x) var(--pointer-y), rgba(0,212,255,.12), transparent 73%); transition: opacity .25s ease; }
+    body::after {
+      opacity: .13;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.19'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+    #particle-field { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .6; }
+    body > header, body > main, body > footer { position: relative; z-index: 1; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .ambient { position: fixed; z-index: 0; width: 34vw; aspect-ratio: 1; border-radius: 50%; filter: blur(80px); opacity: .13; pointer-events: none; animation: float-ambient 18s ease-in-out infinite alternate; }
+    .ambient-one { top: 14%; left: -15%; background: var(--cyan); }
+    .ambient-two { top: 54%; right: -18%; background: var(--purple); animation-delay: -8s; }
+    .light-rays { position: fixed; z-index: 0; top: 0; left: 53%; width: min(100vw,1100px); height: 100vh; transform: translateX(-50%); opacity: .16; pointer-events: none; background: repeating-conic-gradient(from 205deg at 50% 10%, transparent 0deg 8deg, rgba(0,212,255,.12) 9deg, transparent 12deg 23deg); mask-image: linear-gradient(to bottom, black, transparent 76%); }
+    @keyframes float-ambient { to { transform: translate3d(7vw,-4vh,0) scale(1.12); } }
+
+    .topbar { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(15,20,25,.54); backdrop-filter: blur(18px) saturate(145%); box-shadow: 0 10px 30px rgba(0,0,0,.16); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .brand { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 11px; text-decoration: none; font: 700 15px var(--display); letter-spacing: -.02em; }
+    .brand-mark { display: grid; width: 37px; height: 37px; place-items: center; color: #071216; border-radius: 12px; background: linear-gradient(140deg, #8ceeff, var(--cyan)); box-shadow: 0 0 22px rgba(0,212,255,.25); font: 700 12px var(--mono); }
+    .nav-links { display: flex; align-items: center; justify-content: flex-end; gap: clamp(14px, 2.2vw, 27px); }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 12px; transition: color .2s ease, text-shadow .2s ease; }
+    .nav-links a:hover { color: var(--cyan); text-shadow: 0 0 16px rgba(0,212,255,.65); }
+    .scroll-progress { position: absolute; bottom: -1px; left: 0; width: var(--scroll-progress); height: 2px; background: linear-gradient(90deg, var(--cyan), var(--purple)); box-shadow: 0 0 14px rgba(0,212,255,.55); }
+
+    .hero { min-height: calc(100svh - 76px); display: grid; grid-template-columns: minmax(0,1.1fr) minmax(300px,.9fr); align-items: center; gap: clamp(34px,7vw,90px); padding-block: 75px 88px; perspective: 1000px; }
+    .hero-copy-card { position: relative; padding: clamp(27px,5vw,54px); border: 1px solid var(--line); border-radius: 27px; background: linear-gradient(140deg, rgba(255,255,255,.16), rgba(255,255,255,.045)); backdrop-filter: blur(18px); box-shadow: 0 28px 85px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.2); transform: translate3d(var(--hero-x,0),var(--hero-y,0),0); transition: transform .25s ease-out; }
+    .hero-copy-card::before { content: ""; position: absolute; top: 0; left: 12%; width: 76%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--cyan); font: 500 10px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+    h1 { margin: 18px 0 17px; font: 700 clamp(43px,6vw,76px)/.99 var(--display); letter-spacing: -.055em; }
+    h1 .accent { color: transparent; background: linear-gradient(100deg, #fff 5%, var(--cyan) 46%, #c78cff 94%); background-clip: text; -webkit-background-clip: text; }
+    .hero-lede { max-width: 610px; margin: 0; color: var(--muted); font-size: clamp(14px,1.45vw,17px); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+    .button { position: relative; display: inline-flex; min-height: 47px; align-items: center; justify-content: center; gap: 9px; overflow: hidden; padding: 0 18px; border: 1px solid rgba(255,255,255,.28); border-radius: 13px; color: var(--text); background: rgba(255,255,255,.075); backdrop-filter: blur(12px); text-decoration: none; font-size: 12px; font-weight: 650; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease; }
+    .button:hover { transform: translateY(-2px) scale(1.025); border-color: rgba(0,212,255,.7); box-shadow: 0 0 24px rgba(0,212,255,.18); }
+    .button-primary { color: #041217; border-color: transparent; background: linear-gradient(110deg, #8ceeff, var(--cyan)); box-shadow: 0 8px 28px rgba(0,212,255,.2); }
+    .button-primary:hover { background: linear-gradient(110deg, var(--cyan), #b9f6ff); box-shadow: 0 0 35px rgba(0,212,255,.38); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: rgba(233,241,248,.72); background: rgba(255,255,255,.045); font: 10px var(--mono); }
+    .meta-pill .led { width: 6px; height: 6px; border-radius: 50%; background: #81edc2; box-shadow: 0 0 9px #81edc2; }
+    .hero-art { position: relative; min-height: 420px; display: grid; place-items: center; }
+    .hero-art::before, .hero-art::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; transform: rotate(-24deg); }
+    .hero-art::before { width: min(100%,420px); height: 235px; box-shadow: 0 0 34px rgba(0,212,255,.07), inset 0 0 30px rgba(168,85,247,.045); }
+    .hero-art::after { width: min(82%,340px); height: 190px; border-color: rgba(0,212,255,.24); transform: rotate(28deg); }
+    .orbit { position: absolute; width: min(100%,460px); height: 245px; border: 1px solid rgba(0,212,255,.34); border-radius: 50%; transform: rotate(-27deg); animation: orbit-spin 28s linear infinite; }
+    .orbit::before { content: ""; position: absolute; top: 14%; left: 13%; width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 19px 4px rgba(0,212,255,.64); }
+    .orbit-two { width: min(75%,335px); height: 340px; border-color: rgba(168,85,247,.22); transform: rotate(48deg); animation-duration: 37s; animation-direction: reverse; }
+    .orbit-two::before { top: 35%; left: 2%; width: 6px; height: 6px; background: #d49cff; box-shadow: 0 0 17px 4px rgba(168,85,247,.6); }
+    @keyframes orbit-spin { to { rotate: 360deg; } }
+    .identity-glass { position: relative; z-index: 2; width: 230px; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.34); border-radius: 37% 63% 56% 44% / 50% 43% 57% 50%; background: linear-gradient(145deg, rgba(255,255,255,.21), rgba(255,255,255,.045)); backdrop-filter: blur(18px); box-shadow: 0 25px 80px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.3), 0 0 55px rgba(0,212,255,.12); animation: blob-morph 12s ease-in-out infinite alternate; }
+    .identity-glass span { color: transparent; background: linear-gradient(135deg,#fff,var(--cyan) 62%,#cf9aff); background-clip: text; -webkit-background-clip: text; font: 500 76px var(--display); letter-spacing: -.1em; padding-right: .1em; text-shadow: 0 0 42px rgba(0,212,255,.2); }
+    @keyframes blob-morph { to { border-radius: 55% 45% 39% 61% / 45% 59% 41% 55%; transform: rotate(5deg) scale(1.035); } }
+    .art-label { position: absolute; z-index: 2; padding: 8px 11px; border: 1px solid rgba(255,255,255,.18); border-radius: 10px; color: rgba(245,249,255,.82); background: rgba(255,255,255,.08); backdrop-filter: blur(14px); font: 9px var(--mono); letter-spacing: .04em; }
+    .art-label-a { top: 11%; left: 2%; }
+    .art-label-b { right: 2%; bottom: 13%; }
+    .float-chip { position: absolute; z-index: 2; display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid rgba(255,255,255,.26); border-radius: 15px; background: rgba(255,255,255,.105); box-shadow: 0 14px 32px rgba(0,0,0,.2); backdrop-filter: blur(12px); color: var(--cyan); font: 15px var(--mono); animation: float-chip 5s ease-in-out infinite; }
+    .chip-a { top: 21%; right: 13%; }
+    .chip-b { bottom: 20%; left: 10%; color: #d49cff; animation-delay: -2.1s; }
+    @keyframes float-chip { 50% { transform: translateY(-11px) rotate(5deg); } }
+
+    section { padding-block: 88px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+    .section-index { margin: 0 0 7px; color: var(--cyan); font: 500 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+    h2 { margin: 0; font: 650 clamp(30px,4vw,46px)/1.08 var(--display); letter-spacing: -.04em; }
+    .section-note { max-width: 390px; margin: 0; color: var(--muted); font-size: 13px; }
+    .glass { border: 1px solid var(--line); background: linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.055)); backdrop-filter: blur(17px) saturate(140%); box-shadow: 0 20px 55px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.13); }
+    .about-grid { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(270px,.8fr); gap: 18px; }
+    .about-copy, .facts { padding: clamp(23px,3vw,33px); border-radius: 21px; }
+    .about-copy p { color: var(--muted); }
+    .about-copy p:first-child { margin-top: 0; color: rgba(248,251,255,.85); }
+    .about-copy p:last-child { margin-bottom: 0; }
+    .fact { padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .fact:first-child { padding-top: 0; }
+    .fact:last-child { padding-bottom: 0; border: 0; }
+    .fact-label { display: block; margin-bottom: 4px; color: rgba(233,241,248,.54); font: 9px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .fact-value { font-size: 13px; font-weight: 600; }
+
+    .skill-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; }
+    .skill-card { min-height: 190px; padding: 21px; border-radius: 18px; transition: transform .28s ease, background .28s ease, box-shadow .28s ease; }
+    .skill-card:hover { transform: scale(1.035); background-color: rgba(255,255,255,.12); box-shadow: 0 0 32px rgba(0,212,255,.14); }
+    .skill-num { color: var(--cyan); font: 10px var(--mono); }
+    .skill-card h3 { margin: 16px 0 13px; font: 600 18px var(--display); }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid rgba(255,255,255,.16); border-radius: 9px; color: rgba(245,249,255,.79); background: rgba(255,255,255,.065); font: 10px var(--mono); }
+    .tag::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--cyan); }
+
+    .project-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 17px; }
+    .project-card { min-height: 370px; overflow: hidden; border-radius: 21px; transition: transform .3s ease, background .3s ease, border-color .3s ease, box-shadow .3s ease; }
+    .project-card:hover { transform: scale(1.035); border-color: rgba(0,212,255,.46); background-color: rgba(255,255,255,.14); box-shadow: 0 24px 58px rgba(0,0,0,.3), 0 0 31px rgba(0,212,255,.12); }
+    .project-visual { position: relative; height: 165px; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.12); background: radial-gradient(ellipse at 48% 80%,rgba(0,212,255,.25),transparent 55%), linear-gradient(135deg,rgba(255,255,255,.11),rgba(168,85,247,.12)); }
+    .project-visual::before, .project-visual::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.3); transform: rotate(-22deg); }
+    .project-visual::before { top: 28px; left: 20%; width: 60%; height: 95px; border-radius: 50%; box-shadow: 0 0 25px rgba(0,212,255,.16); }
+    .project-visual::after { top: 47px; left: 30%; width: 40%; height: 58px; border-color: rgba(0,212,255,.5); border-radius: 50%; transform: rotate(25deg); }
+    .project-visual .visual-core { position: absolute; top: 58px; left: calc(50% - 12px); width: 24px; height: 24px; border: 1px solid rgba(255,255,255,.75); border-radius: 50%; background: rgba(255,255,255,.2); box-shadow: 0 0 30px rgba(0,212,255,.65); }
+    .project-visual-cad { background: radial-gradient(ellipse at 55% 64%,rgba(168,85,247,.3),transparent 52%), linear-gradient(140deg,rgba(255,255,255,.1),rgba(0,212,255,.11)); }
+    .project-visual-cad::before { width: 80px; height: 80px; top: 40px; left: calc(50% - 40px); border-radius: 12px; transform: rotate(45deg); }
+    .project-visual-cad::after { width: 56px; height: 56px; top: 52px; left: calc(50% - 28px); border-radius: 9px; transform: rotate(45deg); }
+    .project-visual-cad .visual-core { top: 68px; left: calc(50% - 5px); width: 10px; height: 10px; }
+    .project-visual-thinking { background: radial-gradient(ellipse at 52% 55%,rgba(0,212,255,.19),transparent 56%), linear-gradient(145deg,rgba(168,85,247,.13),rgba(255,255,255,.06)); }
+    .project-content { padding: 20px; }
+    .project-topline { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .status { display: inline-flex; align-items: center; gap: 7px; color: #a6f4d0; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+    .project-kind { color: rgba(233,241,248,.52); font: 9px var(--mono); text-transform: uppercase; }
+    .project-content h3 { margin: 13px 0 7px; font: 600 20px var(--display); }
+    .project-content p { min-height: 48px; margin: 0; color: var(--muted); font-size: 12px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 15px; }
+    .project-tags span { color: rgba(245,249,255,.65); font: 9px var(--mono); }
+    .project-open { display: inline-flex; margin-top: 16px; padding: 0; border: 0; color: var(--cyan); background: transparent; font: 600 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .project-open:hover { color: white; text-shadow: 0 0 14px rgba(0,212,255,.7); }
+
+    .learning-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; }
+    .learning-card { min-height: 170px; padding: 21px; border-radius: 18px; }
+    .learning-date { color: var(--cyan); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
+    .learning-card h3 { margin: 14px 0 7px; font: 600 18px var(--display); }
+    .learning-card p { margin: 0; color: var(--muted); font-size: 12px; }
+    .language-row { display: flex; flex-wrap: wrap; gap: 11px; }
+    .language { min-width: 145px; padding: 13px 17px; border-radius: 14px; }
+    .language strong { display: block; font: 600 14px var(--display); }
+    .language span { color: var(--muted); font: 9px var(--mono); }
+    .stats-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+    .stat-chip { min-width: 122px; padding: 12px 15px; border-radius: 14px; text-align: center; }
+    .stat-number { display: block; color: var(--cyan); font: 600 20px var(--display); }
+    .stat-label { color: rgba(233,241,248,.63); font: 9px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+
+    .contact-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 20px; align-items: stretch; }
+    .contact-intro, .contact-form { padding: clamp(22px,3vw,34px); border-radius: 22px; }
+    .contact-intro h2 { margin-bottom: 13px; }
+    .contact-intro > p:not(.section-index) { color: var(--muted); font-size: 13px; }
+    .contact-links { display: grid; gap: 9px; margin-top: 23px; }
+    .contact-link { color: rgba(246,249,255,.8); text-decoration: none; font-size: 12px; }
+    .contact-link:hover { color: var(--cyan); }
+    .socials { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .social-link { padding: 8px 10px; border: 1px solid rgba(255,255,255,.17); border-radius: 10px; color: rgba(246,249,255,.8); background: rgba(255,255,255,.05); text-decoration: none; font: 10px var(--mono); transition: .22s ease; }
+    .social-link:hover { border-color: rgba(0,212,255,.52); color: var(--cyan); box-shadow: 0 0 19px rgba(0,212,255,.1); }
+    .contact-form { display: grid; gap: 13px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: grid; gap: 6px; }
+    .field label { color: rgba(245,249,255,.76); font: 10px var(--mono); }
+    .field input, .field textarea { width: 100%; border: 1px solid rgba(255,255,255,.19); border-radius: 11px; color: var(--text); background: rgba(255,255,255,.065); padding: 12px 13px; font: 12px var(--sans); backdrop-filter: blur(12px); transition: border-color .2s ease, box-shadow .2s ease, background .2s ease; }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(233,241,248,.4); }
+    .field input:focus, .field textarea:focus { border-color: rgba(0,212,255,.62); background: rgba(255,255,255,.09); box-shadow: 0 0 19px rgba(0,212,255,.1); outline: 0; }
+    .field textarea { min-height: 100px; resize: vertical; }
+    .form-note { margin: -3px 0 0; color: rgba(233,241,248,.48); font-size: 10px; }
+    .form-status { min-height: 18px; margin: 0; color: #a6f4d0; font-size: 11px; }
+    footer { padding: 30px 0 38px; color: rgba(233,241,248,.46); font: 9px var(--mono); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid rgba(255,255,255,.11); padding-top: 18px; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--delay,0ms); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .hero-arrive { opacity: 0; animation: arrive .8s ease forwards; animation-delay: var(--delay,0ms); }
+    @keyframes arrive { to { opacity: 1; transform: translateY(0); } }
+    .modal { width: min(520px, calc(100% - 30px)); padding: 0; border: 1px solid rgba(255,255,255,.28); border-radius: 22px; color: var(--text); background: rgba(16,22,29,.88); backdrop-filter: blur(24px); box-shadow: 0 35px 110px rgba(0,0,0,.65); }
+    .modal::backdrop { background: rgba(2,5,9,.68); backdrop-filter: blur(5px); }
+    .modal-inner { padding: 27px; }
+    .modal-close { float: right; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.21); border-radius: 10px; color: white; background: rgba(255,255,255,.08); font-size: 18px; }
+    .modal h2 { margin: 21px 0 10px; font-size: 29px; }
+    .modal p:not(.section-index) { color: var(--muted); font-size: 13px; }
+
+    #cursor { position: fixed; z-index: 50; top: 0; left: 0; width: 27px; height: 27px; border: 1px solid rgba(0,212,255,.74); border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%); opacity: 0; transition: width .2s ease,height .2s ease,opacity .2s ease; box-shadow: 0 0 17px rgba(0,212,255,.18), inset 0 0 10px rgba(0,212,255,.09); }
+    #cursor::before { content: ""; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; border-radius: 50%; background: var(--cyan); transform: translate(-50%,-50%); box-shadow: 0 0 11px 3px rgba(0,212,255,.48); }
+    #cursor::after { content: ""; position: absolute; inset: -5px; border: 1px solid rgba(168,85,247,.4); border-radius: 50%; transform: scale(.8); }
+    #cursor.is-active { width: 40px; height: 40px; }
+    .cursor-tail { position: fixed; z-index: 49; top: 0; left: 0; width: 5px; height: 5px; border-radius: 50%; background: rgba(0,212,255,.47); box-shadow: 0 0 13px rgba(0,212,255,.42); pointer-events: none; transform: translate(-50%,-50%); }
+    @media (pointer:fine) { body, a, button { cursor: none; } input, textarea { cursor: text; } }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: minmax(0,1fr) minmax(260px,.8fr); gap: 25px; }
+      .hero-art { min-height: 360px; }
+      .project-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .project-card:last-child { grid-column: 1 / -1; min-height: 310px; }
+      .project-card:last-child .project-visual { height: 125px; }
+      .skill-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 650px) {
+      .wrap { width: min(var(--max), calc(100% - 30px)); }
+      .nav { min-height: 66px; gap: 12px; }
+      .brand-name { max-width: 138px; font-size: 12px; }
+      .brand-mark { width: 33px; height: 33px; }
+      .nav-links { flex: 1; min-width: 0; gap: 17px; overflow-x: auto; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { flex: 0 0 auto; font-size: 10px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 12px; padding-block: 44px 54px; }
+      .hero-copy-card { padding: 27px 23px; border-radius: 21px; }
+      h1 { font-size: clamp(43px,12vw,61px); }
+      .hero-art { min-height: 300px; margin-top: 6px; }
+      .identity-glass { width: 175px; }
+      .identity-glass span { font-size: 58px; }
+      .hero-art::before { width: min(100%,330px); height: 190px; }
+      .orbit { width: min(100%,350px); height: 190px; }
+      .orbit-two { width: min(75%,260px); height: 255px; }
+      section { padding-block: 62px; }
+      .section-head { display: block; margin-bottom: 22px; }
+      .section-note { margin-top: 10px; }
+      .about-grid, .contact-layout { grid-template-columns: 1fr; }
+      .skill-grid { gap: 11px; }
+      .skill-card { min-height: 170px; padding: 16px; }
+      .skill-card h3 { font-size: 16px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-card, .project-card:last-child { grid-column: auto; min-height: 0; }
+      .project-card:last-child .project-visual { height: 165px; }
+      .project-content p { min-height: 0; }
+      .learning-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { display: block; }
+      .footer-inner span { display: block; margin-top: 6px; }
+      #cursor, .cursor-tail { display: none; }
+      body::before { opacity: .55; }
+      #particle-field { opacity: .32; }
+      .light-rays { opacity: .075; }
+    }
+    @media (max-width: 390px) {
+      .brand-name { max-width: 105px; }
+      .nav-links { gap: 13px; }
+      .skill-grid { grid-template-columns: 1fr; }
+      .skill-card { min-height: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      #particle-field, #cursor, .cursor-tail { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="light-rays" aria-hidden="true"></div>
+  <canvas id="particle-field" aria-hidden="true"></canvas>
+  <div id="cursor" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Yashwanth Sanjai S, home"><span class="brand-mark">YS</span><span class="brand-name">Yashwanth Sanjai S</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#learning">Learning</a><a href="#contact">Contact</a>
+      </div>
+      <div class="scroll-progress" aria-hidden="true"></div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero" id="home" style="border:0">
+        <div class="hero-copy-card hero-arrive" style="--delay:100ms">
+          <div class="eyebrow">Electronics &amp; Communication Engineering</div>
+          <h1>Curious by nature.<br><span class="accent">Engineer in progress.</span></h1>
+          <p class="hero-lede">I’m Yashwanth Sanjai S, a B.Tech Electronics and Communication Engineering student at Kalasalingam Academy of Research and Education. I’m interested in how electronics, embedded systems, and thoughtful design come together.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#projects">Explore my work <span aria-hidden="true">↘</span></a><a class="button" href="#contact">Let’s connect</a></div>
+          <div class="hero-meta"><span class="meta-pill"><i class="led" aria-hidden="true"></i> Currently studying</span><span class="meta-pill">ECE · Class of 2029</span></div>
+        </div>
+        <div class="hero-art hero-arrive" style="--delay:260ms" aria-label="Decorative orbit and glass monogram">
+          <div class="orbit" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div>
+          <div class="identity-glass" aria-hidden="true"><span>YS</span></div>
+          <span class="art-label art-label-a">SYSTEM / ECE-29</span><span class="art-label art-label-b">BUILDING &amp; LEARNING</span>
+          <span class="float-chip chip-a" aria-hidden="true">∿</span><span class="float-chip chip-b" aria-hidden="true">⌁</span>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-head reveal"><div><p class="section-index">01 / Profile</p><h2>About me</h2></div><p class="section-note">A foundation in electronics, with curiosity that reaches across disciplines.</p></div>
+        <div class="about-grid">
+          <article class="about-copy glass reveal"><p>I’m an undergraduate ECE student who enjoys understanding how systems work—from the logic inside a circuit to the experience of the person using it. I’m building a strong foundation in electrical and electronic principles while exploring embedded systems, digital design, and 3D CAD.</p><p>Chess has strengthened my patience and strategic thinking. I bring that same curiosity to technical problem-solving: break a challenge into parts, study the details, and keep improving the solution.</p></article>
+          <aside class="facts glass reveal" style="--delay:120ms" aria-label="Profile details">
+            <div class="fact"><span class="fact-label">Current role</span><span class="fact-value">B.Tech ECE Student</span></div>
+            <div class="fact"><span class="fact-label">Institution</span><span class="fact-value">Kalasalingam Academy of Research and Education</span></div>
+            <div class="fact"><span class="fact-label">Expected graduation</span><span class="fact-value">2029</span></div>
+            <div class="fact"><span class="fact-label">Interests</span><span class="fact-value">Chess · Embedded Systems · Analysis</span></div>
+            <div class="stats-row"><div class="stat-chip glass"><span class="stat-number" data-count="2029">0</span><span class="stat-label">Expected graduation</span></div><div class="stat-chip glass"><span class="stat-number" data-count="3">0</span><span class="stat-label">Spoken languages</span></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-head reveal"><div><p class="section-index">02 / Toolkit</p><h2>Areas I’m building in</h2></div><p class="section-note">A growing toolkit across electronics, embedded systems, design, and collaboration.</p></div>
+        <div class="skill-grid">
+          <article class="skill-card glass reveal"><span class="skill-num">01 — ELECTRONICS</span><h3>Core foundations</h3><div class="tags"><span class="tag">Electrical fundamentals</span><span class="tag">Electronic fundamentals</span><span class="tag">Circuit analysis</span><span class="tag">Digital logic</span></div></article>
+          <article class="skill-card glass reveal" style="--delay:70ms"><span class="skill-num">02 — SYSTEMS</span><h3>Hardware &amp; embedded</h3><div class="tags"><span class="tag">Embedded systems</span><span class="tag">Microcontrollers</span><span class="tag">Hardware–software integration</span></div></article>
+          <article class="skill-card glass reveal" style="--delay:140ms"><span class="skill-num">03 — DESIGN</span><h3>CAD &amp; collaboration</h3><div class="tags"><span class="tag">Autodesk Fusion</span><span class="tag">GrabCAD</span><span class="tag">3D modeling</span></div></article>
+          <article class="skill-card glass reveal"><span class="skill-num">04 — WORKFLOW</span><h3>Engineering practice</h3><div class="tags"><span class="tag">Git &amp; GitHub</span><span class="tag">Design thinking</span><span class="tag">Technical problem-solving</span></div></article>
+          <article class="skill-card glass reveal" style="--delay:70ms"><span class="skill-num">05 — APPROACH</span><h3>How I work</h3><div class="tags"><span class="tag">Logical reasoning</span><span class="tag">Analytical thinking</span><span class="tag">Continuous learning</span></div></article>
+          <article class="skill-card glass reveal" style="--delay:140ms"><span class="skill-num">06 — EXPLORING</span><h3>Cross-disciplinary curiosity</h3><div class="tags"><span class="tag">Product design</span><span class="tag">Practical applications</span><span class="tag">Team collaboration</span></div></article>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-head reveal"><div><p class="section-index">03 / Project lab</p><h2>Work in progress</h2></div><p class="section-note">An evolving project space. Open a card for its current status and focus.</p></div>
+        <div class="project-grid">
+          <article class="project-card glass reveal">
+            <div class="project-visual"><span class="visual-core"></span></div>
+            <div class="project-content"><div class="project-topline"><span class="status">In progress</span><span class="project-kind">ECE / SYSTEMS</span></div><h3>Embedded systems exploration</h3><p>Developing hands-on work around electronic systems, microcontrollers, and hardware–software interaction.</p><div class="project-tags"><span>Embedded</span><span>· Microcontrollers</span><span>· Electronics</span></div><button class="project-open" type="button" data-project="embedded">View details&nbsp; ↗</button></div>
+          </article>
+          <article class="project-card glass reveal" style="--delay:90ms">
+            <div class="project-visual project-visual-cad"><span class="visual-core"></span></div>
+            <div class="project-content"><div class="project-topline"><span class="status">In progress</span><span class="project-kind">CAD / DESIGN</span></div><h3>3D CAD &amp; collaboration</h3><p>Building a project portfolio with Autodesk Fusion and GrabCAD; models and contributions will be added as they’re ready to share.</p><div class="project-tags"><span>Autodesk Fusion</span><span>· GrabCAD</span><span>· 3D design</span></div><button class="project-open" type="button" data-project="cad">View details&nbsp; ↗</button></div>
+          </article>
+          <article class="project-card glass reveal" style="--delay:180ms">
+            <div class="project-visual project-visual-thinking"><span class="visual-core"></span></div>
+            <div class="project-content"><div class="project-topline"><span class="status">In progress</span><span class="project-kind">METHOD / DESIGN</span></div><h3>Problem-solving practice</h3><p>Learning to frame technical challenges around clear needs, logical analysis, and purposeful solutions.</p><div class="project-tags"><span>Design thinking</span><span>· Analysis</span><span>· Learning</span></div><button class="project-open" type="button" data-project="thinking">View details&nbsp; ↗</button></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="learning">
+        <div class="section-head reveal"><div><p class="section-index">04 / Growth</p><h2>Current learning</h2></div><p class="section-note">A work-in-progress record of courses, practice, and certification pathways.</p></div>
+        <div class="learning-grid">
+          <article class="learning-card glass reveal"><span class="learning-date">Ongoing</span><h3>Enterprise Design Thinking</h3><p>Practitioner certification pathway — in progress.</p></article>
+          <article class="learning-card glass reveal" style="--delay:80ms"><span class="learning-date">Ongoing</span><h3>IBM SkillsBuild</h3><p>Exploring learning resources and developing practical skills.</p></article>
+          <article class="learning-card glass reveal" style="--delay:160ms"><span class="learning-date">Ongoing</span><h3>Scaler Topics</h3><p>Continuing self-paced learning and technical practice.</p></article>
+        </div>
+      </section>
+
+      <section id="languages">
+        <div class="section-head reveal"><div><p class="section-index">05 / Communication</p><h2>Languages</h2></div><p class="section-note">Languages I use to learn, collaborate, and connect.</p></div>
+        <div class="language-row"><div class="language glass reveal"><strong>Tamil</strong><span>Language</span></div><div class="language glass reveal" style="--delay:70ms"><strong>English</strong><span>Language</span></div><div class="language glass reveal" style="--delay:140ms"><strong>Hindi</strong><span>Language</span></div></div>
+      </section>
+
+      <section id="contact">
+        <div class="section-head reveal"><div><p class="section-index">06 / Contact</p><h2>Let’s connect.</h2></div><p class="section-note">Interested in electronics, embedded systems, or design? Send a note.</p></div>
+        <div class="contact-layout">
+          <aside class="contact-intro glass reveal"><p class="section-index">OPEN TO CONNECTION</p><p>I’d be glad to connect with fellow students, engineers, and collaborators who enjoy building and learning.</p><div class="contact-links"><a class="contact-link" href="mailto:yashwanth7860@gmail.com">✉ &nbsp;yashwanth7860@gmail.com</a><a class="contact-link" href="tel:+916381465825">↗ &nbsp;+91 63814 65825</a></div><div class="socials"><a class="social-link" href="https://www.instagram.com/_mr._.yax_/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a class="social-link" href="https://www.linkedin.com/in/yashwanth-sanjai-s-0824b6391" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></aside>
+          <form class="contact-form glass reveal" id="contact-form" style="--delay:100ms">
+            <div class="form-row"><div class="field"><label for="sender-name">Your name</label><input id="sender-name" name="name" autocomplete="name" placeholder="Name" required></div><div class="field"><label for="sender-email">Your email</label><input id="sender-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div></div>
+            <div class="field"><label for="sender-message">Message</label><textarea id="sender-message" name="message" placeholder="What would you like to talk about?" required></textarea></div>
+            <p class="form-note">This form opens your email app with the message ready to send; it doesn’t store or send data on its own.</p>
+            <button class="button button-primary" type="submit">Prepare email&nbsp; ↗</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="wrap footer-inner"><span>© <span id="year"></span> Yashwanth Sanjai S</span><span>Glass / ECE portfolio · Designed with curiosity</span></div></footer>
+
+  <dialog class="modal" id="project-modal" aria-labelledby="modal-title"><div class="modal-inner"><button class="modal-close" type="button" aria-label="Close project details">×</button><p class="section-index" id="modal-kicker">PROJECT / IN PROGRESS</p><h2 id="modal-title">Project details</h2><p id="modal-description"></p><p id="modal-status" class="form-note">This project is still in progress. Details and links will be added when ready to share.</p></div></dialog>
+  <div id="cursor" aria-hidden="true"></div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Pointer-responsive particles, links, ambient glow, and reading progress.
+    (() => {
+      const canvas = document.getElementById('particle-field');
+      const ctx = canvas.getContext('2d');
+      const root = document.documentElement;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = window.matchMedia('(pointer: fine)').matches;
+      const pointer = { x: -1000, y: -1000, active: false };
+      const trail = [];
+      const dots = [];
+      let width = 0, height = 0, ratio = 1, frame = 0;
+
+      function resize() {
+        width = window.innerWidth; height = window.innerHeight;
+        ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+        canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
+        canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        const count = Math.max(28, Math.min(88, Math.floor(width * height / 18000)));
+        dots.length = 0;
+        for (let i=0;i<count;i++) dots.push({x:Math.random()*width,y:Math.random()*height,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,r:.6+Math.random()*1.5,phase:Math.random()*6.28,purple:Math.random()<.25});
+        draw(0);
+      }
+      function draw(timestamp) {
+        ctx.clearRect(0,0,width,height);
+        const time = timestamp*.001;
+        for (let i=0;i<dots.length;i++) {
+          const d=dots[i];
+          if (!reducedMotion && finePointer) { d.x+=d.vx; d.y+=d.vy; if(d.x<0||d.x>width)d.vx*=-1; if(d.y<0||d.y>height)d.vy*=-1; }
+          const pulse=.45+.4*(Math.sin(time+d.phase)+1)/2;
+          for(let j=i+1;j<dots.length;j++) { const n=dots[j], dist=Math.hypot(d.x-n.x,d.y-n.y); if(dist<108) { ctx.strokeStyle=`rgba(164,204,221,${(1-dist/108)*.105})`; ctx.lineWidth=.65; ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(n.x,n.y);ctx.stroke(); } }
+          const pd=Math.hypot(d.x-pointer.x,d.y-pointer.y);
+          if(pointer.active&&pd<185) { ctx.strokeStyle=`rgba(0,212,255,${(1-pd/185)*.32})`;ctx.lineWidth=.9;ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(pointer.x,pointer.y);ctx.stroke(); }
+          ctx.fillStyle=d.purple?`rgba(202,158,255,${pulse*.72})`:`rgba(127,232,255,${pulse*.68})`;
+          ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill();
+        }
+        for(let i=trail.length-1;i>=0;i--) { const p=trail[i];p.life-=.035;if(p.life<=0){trail.splice(i,1);continue;}ctx.fillStyle=`rgba(0,212,255,${p.life*.36})`;ctx.beginPath();ctx.arc(p.x,p.y,1+p.life*1.7,0,Math.PI*2);ctx.fill();if(i>0){ctx.strokeStyle=`rgba(168,85,247,${p.life*.13})`;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(trail[i-1].x,trail[i-1].y);ctx.stroke();} }
+      }
+      function animate(timestamp) { draw(timestamp); frame=requestAnimationFrame(animate); }
+      window.addEventListener('pointermove',e=>{ if(e.pointerType==='touch')return;pointer.x=e.clientX;pointer.y=e.clientY;pointer.active=true;root.style.setProperty('--pointer-x',pointer.x+'px');root.style.setProperty('--pointer-y',pointer.y+'px');trail.push({x:pointer.x,y:pointer.y,life:1});if(trail.length>10)trail.shift();if(reducedMotion||!finePointer)draw(performance.now()); },{passive:true});
+      window.addEventListener('pointerleave',()=>{pointer.active=false;root.style.setProperty('--pointer-x','50vw');root.style.setProperty('--pointer-y','24vh');});
+      window.addEventListener('resize',resize,{passive:true});
+      window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-window.innerHeight;root.style.setProperty('--scroll-progress',(max>0?window.scrollY/max*100:0)+'%');},{passive:true});
+      resize();if(!reducedMotion&&finePointer)frame=requestAnimationFrame(animate);window.addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
+    })();
+
+    // Reveal sections as they enter view, with each card's small stagger delay.
+    const revealObserver = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target);} }); },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+    // Count-up figures are factual: expected graduation year and listed languages.
+    const countObserver = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(!entry.isIntersecting)return;const el=entry.target,target=Number(el.dataset.count);if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=target.toLocaleString();countObserver.unobserve(el);return;}const start=performance.now(),duration=850;function tick(now){const p=Math.min((now-start)/duration,1);el.textContent=Math.round(target*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);countObserver.unobserve(el); }); },{threshold:.5});
+    document.querySelectorAll('[data-count]').forEach(el=>countObserver.observe(el));
+
+    // Gentle pointer parallax on the hero glass panel.
+    if(window.matchMedia('(pointer:fine)').matches&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      const hero=document.querySelector('.hero');
+      hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;hero.style.setProperty('--hero-x',(x*5)+'px');hero.style.setProperty('--hero-y',(y*5)+'px');},{passive:true});
+      hero.addEventListener('pointerleave',()=>{hero.style.setProperty('--hero-x','0px');hero.style.setProperty('--hero-y','0px');});
+    }
+
+    // Project modal keeps unfinished work clearly labelled as in progress.
+    const projectInfo={
+      embedded:{title:'Embedded systems exploration',text:'A developing focus on electronic systems, microcontrollers, and the connection between hardware and software. Project-specific details will be added when the work is ready to share.'},
+      cad:{title:'3D CAD & collaboration',text:'A developing project area for Autodesk Fusion models and GrabCAD collaboration. Model previews, responsibilities, and links will be added as shareable work becomes available.'},
+      thinking:{title:'Problem-solving practice',text:'A learning area focused on understanding a problem, analyzing its constraints, and shaping a purposeful engineering solution.'}
+    };
+    const modal=document.getElementById('project-modal');
+    document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{const item=projectInfo[button.dataset.project];document.getElementById('modal-title').textContent=item.title;document.getElementById('modal-description').textContent=item.text;modal.showModal();}));
+    modal.querySelector('.modal-close').addEventListener('click',()=>modal.close());
+    modal.addEventListener('click',e=>{if(e.target===modal)modal.close();});
+
+    // Contact form prepares a message in the visitor's email app; it does not claim server delivery.
+    document.getElementById('contact-form').addEventListener('submit',e=>{
+      e.preventDefault();
+      const form=e.currentTarget,data=new FormData(form);
+      const subject=encodeURIComponent('Portfolio message from '+data.get('name'));
+      const body=encodeURIComponent('Name: '+data.get('name')+'\nEmail: '+data.get('email')+'\n\n'+data.get('message'));
+      document.getElementById('form-status').textContent='Your email app should open with the message ready. Review it and press Send there.';
+      window.location.href='mailto:yashwanth7860@gmail.com?subject='+subject+'&body='+body;
+    });
+
+    // Custom cyan orbital cursor with a fading trail on mouse/trackpad devices.
+    (()=>{const cursor=document.getElementById('cursor');if(!window.matchMedia('(pointer:fine)').matches||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const tail=[];for(let i=0;i<7;i++){const dot=document.createElement('span');dot.className='cursor-tail';dot.style.opacity=String(.44-i*.052);document.body.appendChild(dot);tail.push({el:dot,x:-100,y:-100});}let x=-100,y=-100;window.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;x=e.clientX;y=e.clientY;cursor.style.left=x+'px';cursor.style.top=y+'px';cursor.style.opacity='1';},{passive:true});document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('pointerenter',()=>cursor.classList.add('is-active'));el.addEventListener('pointerleave',()=>cursor.classList.remove('is-active'));});function follow(){let tx=x,ty=y;tail.forEach((dot,i)=>{dot.x+=(tx-dot.x)*(.34-i*.025);dot.y+=(ty-dot.y)*(.34-i*.025);dot.el.style.left=dot.x+'px';dot.el.style.top=dot.y+'px';tx=dot.x;ty=dot.y;});requestAnimationFrame(follow);}follow();})();
+  </script>
+</body>
+</html>
