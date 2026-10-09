@@ -1,0 +1,7 @@
+export default function Showcase() { return (<section id="showcase">
+        <div className="chapter-head reveal"><div><p className="chapter-kicker">Chapter 04 · Featured work · The showcase</p><h2>The next build.</h2><p className="chapter-note">A featured direction for the project portfolio as hands-on work develops.</p></div><span className="chapter-number" aria-hidden="true">04</span></div>
+        <article className="featured story-panel reveal">
+          <div className="featured-art"><div className="featured-orb">ECE</div></div>
+          <div className="featured-copy"><span className="featured-status">IN PROGRESS / FUTURE PROJECT SPACE</span><h3>Connecting the physical and digital.</h3><p>Exploring how embedded systems and electronics can solve practical problems. Project-specific details, images, technologies, and outcomes will be added as real work is ready to share.</p><ul className="tech-list"><li style={{'--delay': '0ms'}}>Electronics</li><li style={{'--delay': '80ms'}}>Embedded systems</li><li style={{'--delay': '160ms'}}>Microcontrollers</li><li style={{'--delay': '240ms'}}>Purposeful design</li></ul><button className="button button-primary ripple-button" data-project="featured" type="button">Explore this direction&nbsp; ↗</button></div>
+        </article>
+      </section>); }

@@ -1,0 +1,11 @@
+export default function Story() { return (<section id="story">
+        <div className="chapter-head reveal"><div><p className="chapter-kicker">Chapter 01 · The story begins</p><h2>Learning how things connect.</h2><p className="chapter-note">A little about the person behind the circuits, systems, and questions.</p></div><span className="chapter-number" aria-hidden="true">01</span></div>
+        <div className="story-grid">
+          <div className="profile-scene story-panel reveal from-left"><span className="profile-reveal">YS</span><span className="profile-caption">PROFILE / DEFAULT MONOGRAM</span></div>
+          <div className="story-copy story-panel reveal from-right"><p>I’m an undergraduate ECE student who enjoys understanding how systems work—from the logic inside a circuit to the experience of the person using it. I’m building a foundation in electrical and electronic principles while exploring embedded systems, digital design, and 3D CAD.</p><p>Chess has strengthened my patience and strategic thinking. I bring that same curiosity to technical problem-solving: break a challenge into parts, study the details, and keep improving the solution.</p>
+            <div className="timeline" id="timeline"><article className="timeline-card reveal from-right"><span className="timeline-date">Present · B.Tech ECE</span><h3>Kalasalingam Academy of Research and Education</h3><p>Studying Electronics and Communication Engineering and developing my technical foundations.</p></article><article className="timeline-card reveal from-right" id="journey" style={{'--delay': '100ms'}}><span className="timeline-date">Expected · 2029</span><h3>The next chapter</h3><p>Continuing to learn through coursework, practice, and projects as they take shape.</p></article></div>
+            <div className="facts"><div><span>Current role</span><strong>B.Tech ECE Student</strong></div><div><span>Interests</span><strong>Chess · Embedded systems · Analysis</strong></div></div>
+            <div className="story-stats"><div className="story-stat"><strong data-count="2029">0</strong><span>Expected graduation</span></div><div className="story-stat"><strong data-count="3">0</strong><span>Spoken languages</span></div></div>
+          </div>
+        </div>
+      </section>); }

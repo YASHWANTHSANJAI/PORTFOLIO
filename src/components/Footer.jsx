@@ -1,0 +1,1 @@
+export default function Footer() { return (<footer><div className="wrap footer-inner"><span>© <span id="year"></span> Yashwanth Sanjai S · <span id="typed-footer">The story continues.</span></span><a className="back-top" href="#home" aria-label="Back to top">↑</a></div></footer>); }

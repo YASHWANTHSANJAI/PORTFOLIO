@@ -1,0 +1,4 @@
+export default function ChapterRail() { return (<nav className="chapter-rail" aria-label="Chapter navigation">
+    <a href="#home" className="active" aria-label="Introduction"><span>Introduction</span></a><a href="#story" aria-label="The story begins"><span>The story begins</span></a><a href="#arsenal" aria-label="The arsenal"><span>The arsenal</span></a><a href="#achievements" aria-label="The achievements"><span>The achievements</span></a><a href="#showcase" aria-label="Featured work"><span>Featured work</span></a><a href="#momentum" aria-label="Current learning"><span>Current learning</span></a><a href="#contact" aria-label="Contact"><span>The call to action</span></a>
+    <span className="rail-readout" aria-hidden="true"><b id="rail-percent">00%</b><small>SCROLL</small></span>
+  </nav>); }

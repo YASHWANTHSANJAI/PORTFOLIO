@@ -1,0 +1,12 @@
+export default function Hero() { return (<section className="hero" id="home" style={{paddingTop: '110px'}}>
+        <div className="hero-bg" data-parallax-speed="0.5" aria-hidden="true"><div className="hero-gradient"></div><svg className="hero-svg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="story-line"><stop stop-color="#ff6b6b"/><stop offset=".52" stop-color="#00d9ff"/><stop offset="1" stop-color="#ffd93d"/></linearGradient></defs><path d="M-80 600 C200 320 360 780 600 490 S1020 160 1490 380"/><path d="M-60 690 C180 410 360 840 660 590 S1030 290 1470 470"/><path d="M110 110 C330 280 430 110 660 240 S1020 630 1350 210"/><circle cx="310" cy="520" r="4"/><circle cx="1020" cy="360" r="3"/><circle cx="790" cy="220" r="4"/></svg><span className="floating-shape shape-a"></span><span className="floating-shape shape-b"></span><span className="floating-shape shape-c"></span></div>
+        <div className="hero-copy" data-parallax-speed="0.8">
+          <div className="eyebrow">A portfolio in chapters · ECE / 2029</div>
+          <h1 id="hero-title" aria-label="Curious by nature. Engineer in progress."><span className="hero-title-line" data-type-line="Curious by nature."></span><span className="hero-title-line" data-type-line="Engineer in progress."></span></h1>
+          <p className="hero-subtext" id="hero-subtext">I’m Yashwanth Sanjai S — an Electronics and Communication Engineering student interested in the worlds where hardware, software, and purposeful design meet.</p>
+          <div className="hero-actions"><a className="button button-primary ripple-button" href="#story">Begin the story&nbsp; ↓</a><a className="button ripple-button" href="#contact">Connect with me&nbsp; ↗</a></div>
+          <div className="hero-meta"><span className="meta-chip">Kalasalingam Academy of Research and Education</span><span className="meta-chip">Expected graduation · 2029</span></div>
+        </div>
+        <div className="hero-visual" data-parallax-speed="1" aria-label="Decorative YS orbit illustration"><div className="visual-disc"><span className="visual-initials">YS</span></div><span className="visual-caption caption-a">CHAPTER 00 / INTRO</span><span className="visual-caption caption-b">STILL BECOMING</span></div>
+        <a className="scroll-cue" href="#story"><span>Scroll to turn the page</span><span aria-hidden="true">↓</span></a>
+      </section>); }
